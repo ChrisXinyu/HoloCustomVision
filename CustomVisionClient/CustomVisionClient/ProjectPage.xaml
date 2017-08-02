@@ -1,0 +1,111 @@
+﻿<Page x:Class="CustomVisionClient.ProjectPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CustomVisionClient"
+      xmlns:data="clr-namespace:Microsoft.Cognitive.CustomVision.Models;assembly=Microsoft.Cognitive.CustomVision.Training"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ProjectPage">
+    <Page.Resources>
+        <DataTemplate x:Key="ImageGridViewTemplate" DataType="{x:Type data:ImageModel}">
+            <Grid Width="130" Height="130">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Stretch="UniformToFill" Grid.Row="0" Grid.RowSpan="2">
+                    <Image.Source>
+                        <Binding Path="ThumbnailUri">
+                            <Binding.TargetNullValue>
+                                <ImageSource>Images/GrayBG.jpg</ImageSource>
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                </Image>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="TagsListViewTemplate" DataType="{x:Type data:ImageTagModel}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="      "></TextBlock>
+                <TextBlock Text="{Binding Path=Name}" FontSize="14"></TextBlock>
+                <TextBlock Text="   (" FontSize="14"></TextBlock>
+                <TextBlock Text="{Binding Path=ImageCount}" FontSize="14"></TextBlock>
+                <TextBlock Text=")" FontSize="14"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images\Home.png" Width="20" Height="20" Grid.Column="0" MouseDown="HomeBack_MouseDown"></Image>
+            <Image Source="Images\Setting.png" Width="20" Height="20" Grid.Column="1" MouseDown="AccountImage_MouseDown"></Image>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="projectNameTextBlock" FontSize="20" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Label Width="40"></Label>
+                <Image Source="Images\AddImage.png" Width="25" Height="25" MouseDown="AddImages_MouseDown"></Image>
+                <TextBlock VerticalAlignment="Center" Text="  Add Images"></TextBlock>
+                <Button Content="Train" Width="80" Height="30" Margin="20,0,0,0" Click="TrainButton_Click"></Button>
+                <Button Content="Iteration" Width="80" Height="30" Margin="20,0,0,0" Click="IterationButton_Click"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="20" Grid.Column="0" Text="  Tags"></TextBlock>
+                <Image Source="Images/Plus.png" Grid.Column="1" Width="20" Height="20"
+                       HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0"
+                       MouseDown="NewTagImage_MouseDown"></Image>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" MouseDown="AllTagsPanel_MouseDown">
+                    <TextBlock Text="   All     " FontSize="14"></TextBlock>
+                    <TextBlock Name="TagsCountTextBlock" FontSize="14"></TextBlock>
+                </StackPanel>
+                <ListView Name="TagListView" 
+                          ItemTemplate="{StaticResource TagsListViewTemplate}" 
+                          Grid.Row="2" BorderThickness="0"
+                          SelectionChanged="TagListView_SelectionChanged">
+                </ListView>
+            </Grid>
+        </Grid>
+        <ListBox Name="ImageListBox" ItemTemplate="{StaticResource ImageGridViewTemplate}"
+                 Grid.Row="1" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Page>

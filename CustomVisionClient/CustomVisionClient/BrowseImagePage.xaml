@@ -1,0 +1,24 @@
+﻿<Page x:Class="CustomVisionClient.BrowseImagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CustomVisionClient"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="BrowseImagePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Add some images!" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" Foreground="#FF0063B1"></TextBlock>
+        <Image Source="Images\UploadImage.png" Grid.Row="2"></Image>
+        <Image Source="Images\BrowseLocalImage.png" Grid.Row="3" Width="200" MouseDown="BrowseImage_MouseDown"></Image>
+        <Image Source="Images\BrowseOnlineImage.png" Grid.Row="4" Width="200" MouseDown="BrowseOnlineImage_MouseDown"></Image>
+    </Grid>
+</Page>
