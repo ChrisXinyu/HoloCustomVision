@@ -9,7 +9,7 @@
 #### 1、进入*[Custom Vision Portal](https://www.customvision.ai)*，使用微软账户登录授权，至少创建一个空白工程，获取Training Key   ####
 ![](../Screenshots/CustomVisionClient/0.jpg)  
 
-####2、打开应用，填写Training Key，进入应用####
+#### 2、打开应用，填写Training Key，进入应用    ####
 ![](../Screenshots/CustomVisionClient/1.jpg)  
 ![](../Screenshots/CustomVisionClient/2.jpg)  
 
